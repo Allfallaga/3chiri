@@ -1,1 +1,33 @@
+# Fichiers et dossiers Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
 
+# Environnements virtuels
+venv/
+.env
+
+# Configuration d'IDE
+.vscode/
+.idea/
+
+# Fichiers de logs
+*.log
+
+# Base de données SQLite
+*.sqlite3
+
+# Clés et fichiers sensibles
+.env
+*.key
+
+# Byte-compiled / optimisé
+*.pyc
+*.pyo
+
+# Caches
+*.cache
+*.egg-info/
+dist/
+build/
