@@ -64,9 +64,10 @@ def inscription():
     return render_template('inscription.html')
 
 
-  @app.route('/connexion', methods=['GET', 'POST'])
+ @app.route('/connexion', methods=['GET', 'POST'])
 def connexion():
     """Page de connexion pour un utilisateur existant."""
+    
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
         password = request.form.get('password', '')
