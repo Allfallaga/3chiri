@@ -82,6 +82,8 @@ def connexion():
 
     # GET : Afficher le formulaire de connexion
     return render_template('connexion.html')
+
+
 @app.route('/deconnexion')
 def deconnexion():
     """Déconnexion de l'utilisateur courant."""
