@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Salons</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Gestion des Salons</h1>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h3>Liste des Salons</h3>
+                {% if salles %}
+                    <ul class="list-group">
+                        {% for room_id, room in salles.items() %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>{{ room.nom }} ({{ room.type | capitalize }})</span>
+                                <a href="{{ url_for('chat_salon', room_id=room_id) }}" class="btn btn-sm btn-primary">Rejoindre</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">Aucun salon disponible pour le moment. Créez-en un nouveau !</p>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <h3>Créer un Salon</h3>
+                <form method="POST" action="{{ url_for('gestion_salles') }}">
+                    <div class="mb-3">
+                        <label for="nom_salle" class="form-label">Nom du salon</label>
+                        <input type="text" class="form-control" id="nom_salle" name="nom_salle" placeholder="Entrez le nom du salon" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Type de salon</label>
+                        <select class="form-select" id="type" name="type">
+                            <option value="public">Public</option>
+                            <option value="prive">Privé</option>
+                            <option value="payant">Payant</option>
+                        </select>
+                    </div>
+                    <div class="mb-3" id="code_group" style="display: none;">
+                        <label for="code" class="form-label">Code d'accès (pour les salons privés)</label>
+                        <input type="text" class="form-control" id="code" name="code" placeholder="Ex : 1234">
+                    </div>
+                    <div class="mb-3" id="cost_group" style="display: none;">
+                        <label for="cost" class="form-label">Coût (en points, pour les salons payants)</label>
+                        <input type="number" class="form-control" id="cost" name="cost" placeholder="Ex : 10">
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Créer le salon</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const typeSelect = document.getElementById('type');
+        const codeGroup = document.getElementById('code_group');
+        const costGroup = document.getElementById('cost_group');
+
+        typeSelect.addEventListener('change', function() {
+            if (this.value === 'prive') {
+                codeGroup.style.display = 'block';
+                costGroup.style.display = 'none';
+            } else if (this.value === 'payant') {
+                codeGroup.style.display = 'none';
+                costGroup.style.display = 'block';
+            } else {
+                codeGroup.style.display = 'none';
+                costGroup.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
