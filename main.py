@@ -1,4 +1,4 @@
-@app.route('/inscription', methods=['GET', 'POST'])
+'/inscription', methods=['GET', 'POST'])
 def inscription():
     """Page d'inscription pour un nouvel utilisateur."""
     if request.method == 'POST':
@@ -63,10 +63,10 @@ def inscription():
     # Afficher le formulaire d'inscription
     return render_template('inscription.html')
 
+
 @app.route('/connexion', methods=['GET', 'POST'])
 def connexion():
     """Page de connexion pour un utilisateur existant."""
-    
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
         password = request.form.get('password', '')
@@ -81,7 +81,6 @@ def connexion():
 
     # GET : Afficher le formulaire de connexion
     return render_template('connexion.html')
-Étapes pour corriger 
 
 
 @app.route('/deconnexion')
@@ -99,7 +98,10 @@ def dashboard():
         flash("Veuillez vous connecter pour accéder à votre tableau de bord.", 'warning')
         return redirect(url_for('connexion'))
 
-  '/wallet/recharger', methods=['POST'])
+    return render_template('dashboard.html')
+
+
+@app.route('/wallet/recharger', methods=['POST'])
 def recharger_wallet():
     """Recharge manuelle de points pour l'utilisateur."""
     # Vérifier si l'utilisateur est connecté
@@ -107,31 +109,33 @@ def recharger_wallet():
         flash("Veuillez vous connecter pour recharger votre portefeuille.", 'warning')
         return redirect(url_for('connexion'))
 
-  # Récupérer les informations de l'utilisateur
-user = utilisateurs.get(session['username'])
-if not user:
-    # Cas improbable : l'utilisateur en session n'existe pas
-    session.clear()
-    flash("Session invalide, veuillez vous reconnecter.", 'warning')
-    return redirect(url_for('accueil'))
+    # Récupérer les informations de l'utilisateur
+    user = utilisateurs.get(session['username'])
+    if not user:
+        # Cas improbable : l'utilisateur en session n'existe pas
+        session.clear()
+        flash("Session invalide, veuillez vous reconnecter.", 'warning')
+        return redirect(url_for('accueil'))
 
-try:
-    # Récupérer et valider le montant saisi
-    montant = int(request.form.get('montant', 0))
-    if montant > 0:
-        # Ajouter les points et mettre à jour le rôle
-        user['points'] += montant
-        ajouter_transaction(session['username'], f"Recharge de {montant} points")
-        flash(f"Votre portefeuille a été rechargé de {montant} points.", 'success')
+    try:
+        # Récupérer et valider le montant saisi
+        montant = int(request.form.get('montant', 0))
+        if montant > 0:
+            # Ajouter les points et mettre à jour le rôle
+            user['points'] += montant
+            ajouter_transaction(session['username'], f"Recharge de {montant} points")
+            flash(f"Votre portefeuille a été rechargé de {montant} points.", 'success')
 
-        # Mise à jour du rôle de l'utilisateur en fonction des points
-        user['role'] = determiner_role_utilisateur(user['followers'], user['points'])
-    else:
-        # Gérer un montant invalide
-        flash("Montant invalide pour la recharge. Veuillez entrer un montant supérieur à zéro.", 'warning')
-except ValueError:
-    # Gestion d'une saisie invalide
-    flash("Montant invalide. Veuillez entrer un nombre entier.", 'danger')
+            # Mise à jour du rôle de l'utilisateur en fonction des points
+            user['role'] = determiner_role_utilisateur(user['followers'], user['points'])
+        else:
+            # Gérer un montant invalide
+            flash("Montant invalide pour la recharge. Veuillez entrer un montant supérieur à zéro.", 'warning')
+    except ValueError:
+        # Gestion d'une saisie invalide
+        flash("Montant invalide. Veuillez entrer un nombre entier.", 'danger')
+
+    return redirect(url_for('dashboard'))
 
 return redirect(url_for('dashboard'))
 
