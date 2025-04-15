@@ -1,4 +1,4 @@
-'/inscription', methods=['GET', 'POST'])
+@app.route('/inscription', methods=['GET', 'POST'])
 def inscription():
     """Page d'inscription pour un nouvel utilisateur."""
     if request.method == 'POST':
