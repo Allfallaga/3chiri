@@ -63,6 +63,7 @@ def inscription():
     # Afficher le formulaire d'inscription
     return render_template('inscription.html')
 
+
 @app.route('/connexion', methods=['GET', 'POST'])
 def connexion():
     """Page de connexion pour un utilisateur existant."""
