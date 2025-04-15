@@ -63,7 +63,6 @@ def inscription():
     # Afficher le formulaire d'inscription
     return render_template('inscription.html')
 
-
 @app.route('/connexion', methods=['GET', 'POST'])
 def connexion():
     """Page de connexion pour un utilisateur existant."""
@@ -82,6 +81,7 @@ def connexion():
 
     # GET : Afficher le formulaire de connexion
     return render_template('connexion.html')
+Étapes pour corriger 
 
 
 @app.route('/deconnexion')
