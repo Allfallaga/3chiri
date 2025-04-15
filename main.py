@@ -1,6 +1,9 @@
+from flask import Flask
+
+app = Flask(__name__)
+
 @app.route('/inscription', methods=['GET', 'POST'])
 def inscription():
-
     """Page d'inscription pour un nouvel utilisateur."""
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
