@@ -1,1 +1,23 @@
+# Framework Flask et extensions
+Flask==2.2.5
+Flask-SQLAlchemy==3.0.5
+Flask-WTF==1.1.1
+Flask-Mail==0.9.1
 
+# Gestion des mots de passe et sécurité
+bcrypt==4.0.1
+itsdangerous==2.1.2
+
+# Base de données
+SQLAlchemy==1.4.46
+mysqlclient==2.1.1  # Si vous utilisez MySQL
+psycopg2-binary==2.9.6  # Si vous utilisez PostgreSQL
+
+# Autres bibliothèques utiles
+requests==2.31.0
+python-dotenv==1.0.0  # Pour gérer le fichier .env
+
+# Tests
+pytest==7.3.1
+pytest-flask==1.2.0
+coverage==7.2.7
