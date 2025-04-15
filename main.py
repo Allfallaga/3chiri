@@ -1,6 +1,9 @@
 @app.route('/inscription', methods=['GET', 'POST'])
 def inscription():
     """Page d'inscription pour un nouvel utilisateur."""
+    # ... (le reste du code de la fonction)
+def inscription():
+    """Page d'inscription pour un nouvel utilisateur."""
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
         password = request.form.get('password', '')
