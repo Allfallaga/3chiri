@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil - 3chiri</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Bienvenue sur 3chiri !</h1>
+    <p>
+        Connecte-toi ou inscris-toi pour rejoindre les salons de discussion.<br>
+        <a href="{{ url_for('connexion') }}">Connexion</a> |
+        <a href="{{ url_for('inscription') }}">Inscription</a>
+    </p>
+    <hr>
+    <p>
+        <a href="{{ url_for('rooms') }}">Voir les salons</a>
+    </p>
+</body>
+</html>
