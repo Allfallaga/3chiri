@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Salon</title>
+</head>
+<body>
+    <h1>Salon : {{ salle.nom }}</h1>
+    <div>
+        <h3>Messages :</h3>
+        <ul>
+            {% for msg in salle.messages %}
+                <li><b>{{ msg.author }}</b> : {{ msg.content }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <form method="POST">
+        <input type="hidden" name="action" value="send">
+        <input type="text" name="message" placeholder="Votre message" required>
+        <button type="submit">Envoyer</button>
+    </form>
+    <a href="{{ url_for('dashboard') }}">Retour au dashboard</a>
+</body>
+</html>
